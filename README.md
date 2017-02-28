@@ -6,6 +6,7 @@
 - User -> Devise
 - AdminUser -> STI
 - Roles - Pundit
+
 * Banners
 * Development
 * Product Set-ups
