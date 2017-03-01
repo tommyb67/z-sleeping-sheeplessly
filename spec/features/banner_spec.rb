@@ -14,21 +14,20 @@ describe 'navigate' do
   end
 
     describe 'creation' do
-      it 'has a new form that can be reached' do
+      before do
         visit new_banner_path
+      end
+
+      it 'has a new form that can be reached' do
         expect(page.status_code).to eq(200)
     end
 
     it 'can be created from new form page' do
-      visit new_banner_path
-
       fill_in 'banner[start_date]', with: Date.today
       fill_in 'banner[end_date]', with: Date.today
       fill_in 'banner[image]', with: ("Some address")
       fill_in 'banner[location]', with: ("Some location")
-
       click_on "Save"
-
       expect(page).to have_content("Some content")
     end
   end
