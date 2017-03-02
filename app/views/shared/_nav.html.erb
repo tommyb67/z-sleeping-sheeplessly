@@ -3,22 +3,22 @@
 </div>
 
 <ul class="custom-nav nav nav-tabs">
-  <li class="active">
+  <li class=<%= active?(root_path) %>>
     <%= link_to "Home", root_path %>
   </li>
-  <li>
+  <li class=<%= active?(banners_path) %>>
     <%= link_to "Banners", banners_path %>
   </li>
-  <li class="disabled">
+  <li>
     <a href="#">Development</a>
   </li>
-  <li class="disabled">
+  <li>
     <a href="#">Promotions</a>
   </li>
-  <li class="disabled">
+  <li>
     <a href="#">Product Setups</a>
   </li>
-  <li class="disabled">
+  <li>
     <a href="#">Ad-Hoc Requests</a>
   </li>
   <li class="dropdown pull-right">
