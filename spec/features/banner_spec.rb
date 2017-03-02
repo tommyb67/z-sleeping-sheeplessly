@@ -1,22 +1,34 @@
 require 'rails_helper'
 
 describe 'navigate' do
+  before do
+    user = User.create(email: "test@test.com", password: "abcdef", password_confirmation: "abcdef", first_name: "William", last_name: "Yeats")
+    login_as(user, :scope => :user)
+  end
+
   describe 'index' do
-    it 'can be reached successfully' do
+    before do
       visit banners_path
+    end
+
+    it 'can be reached successfully' do
       expect(page.status_code).to eq(200)
     end
 
     it 'has a title of Banners' do
-      visit banners_path
       expect(page).to have_content(/Banners/)
+    end
+
+    it 'has a list of banner requests' do
+      banner1 = Banner.create(start_date: Date.today, end_date: Date.tomorrow, image: "k:/banners/sleeping", location: "Jumbotron 1")
+      banner2 = Banner.create(start_date: Date.today, end_date: Date.tomorrow, image: "k:/banners/sleeping", location: "Jumbotron 2")
+      visit banners_path
+      expect(page).to have_content(/Jumbotron 1|Jumbotron 2/)
     end
   end
 
     describe 'creation' do
       before do
-        user = User.create(email: "test@test.com", password: "abcdef", password_confirmation: "abcdef", first_name: "William", last_name: "Yeats")
-        login_as(user, :scope => :user)
         visit new_banner_path
       end
 
