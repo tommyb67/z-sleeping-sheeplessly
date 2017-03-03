@@ -2,8 +2,8 @@ require 'rails_helper'
 
 describe 'navigate' do
   before do
-    user = User.create(email: "test@test.com", password: "abcdef", password_confirmation: "abcdef", first_name: "William", last_name: "Yeats")
-    login_as(user, :scope => :user)
+    @user = User.create(email: "test@test.com", password: "abcdef", password_confirmation: "abcdef", first_name: "William", last_name: "Yeats")
+    login_as(@user, :scope => :user)
   end
 
   describe 'index' do
@@ -20,8 +20,8 @@ describe 'navigate' do
     end
 
     it 'has a list of banner requests' do
-      banner1 = Banner.create(start_date: Date.today, end_date: Date.tomorrow, image: "k:/banners/sleeping", location: "Jumbotron 1")
-      banner2 = Banner.create(start_date: Date.today, end_date: Date.tomorrow, image: "k:/banners/sleeping", location: "Jumbotron 2")
+      banner1 = Banner.create(start_date: Date.today, end_date: Date.tomorrow, image: "k:/banners/sleeping", location: "Jumbotron 1", user_id: @user)
+      banner2 = Banner.create(start_date: Date.today, end_date: Date.tomorrow, image: "k:/banners/sleeping", location: "Jumbotron 2", user_id: @user)
       visit banners_path
       expect(page).to have_content(/Jumbotron 1|Jumbotron 2/)
     end
