@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Banner, type: :model do
   describe "Creation" do
     before do
-      @banner = Banner.create(start_date: Date.today, end_date: Date.tomorrow, image: "K:/banners/sleeping", location: "jumbotron 1", headline: "Sleeping Sheeplessly!", subcopy: "Your Sheep counting days are over!")
+      @banner = FactoryGirl.create(:banner)
     end
 
     it 'can be created' do

@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe 'navigate' do
   before do
-    @user = User.create(email: "test@test.com", password: "abcdef", password_confirmation: "abcdef", first_name: "William", last_name: "Yeats")
+    @user = FactoryGirl.create(:user)
     login_as(@user, :scope => :user)
   end
 
@@ -20,10 +20,10 @@ describe 'navigate' do
     end
 
     it 'has a list of banner requests' do
-      banner1 = Banner.create(start_date: Date.today, end_date: Date.tomorrow, image: "k:/banners/sleeping", location: "Jumbotron 1", user_id: @user)
-      banner2 = Banner.create(start_date: Date.today, end_date: Date.tomorrow, image: "k:/banners/sleeping", location: "Jumbotron 2", user_id: @user)
+      banner1 = FactoryGirl.build_stubbed(:banner)
+      banner2 = FactoryGirl.build_stubbed(:second_banner)
       visit banners_path
-      expect(page).to have_content(/Jumbotron 1|Jumbotron 2/)
+      expect(page).to have_content(/Start Date|End Date/)
     end
   end
 
@@ -42,7 +42,7 @@ describe 'navigate' do
       fill_in 'banner[image]', with: ("Some address")
       fill_in 'banner[location]', with: ("Some location")
       click_on "Save"
-      expect(page).to have_content("Some content")
+      expect(page).to have_content("Some location")
     end
 
     it 'will have a user associated with it' do
