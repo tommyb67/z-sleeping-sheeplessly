@@ -27,14 +27,34 @@ describe 'navigate' do
     end
   end
 
-    describe 'creation' do
-      before do
-        visit new_banner_path
-      end
+  describe 'new' do
+    it 'has a link from the homepage' do
+      visit root_path
 
-      it 'has a new form that can be reached' do
-        expect(page.status_code).to eq(200)
+      click_link("new_banner_from_nav")
+      expect(page.status_code).to eq(200)
     end
+  end
+
+ describe 'delete' do
+  it 'can be deleted' do
+    @banner = FactoryGirl.create(:banner)
+    visit banners_path
+
+    click_link("delete_post_#{@banner.id}_from_index")
+    expect(page.status_code).to eq(200)
+  end
+ end
+
+
+  describe 'creation' do
+    before do
+      visit new_banner_path
+    end
+
+    it 'has a new form that can be reached' do
+      expect(page.status_code).to eq(200)
+  end
 
     it 'can be created from new form page' do
       fill_in 'banner[start_date]', with: Date.today

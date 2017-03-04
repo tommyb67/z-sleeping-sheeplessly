@@ -9,6 +9,9 @@
   <li class=<%= active?(banners_path) %>>
     <%= link_to "Banners", banners_path %>
   </li>
+  <li class=<%= active?(new_banner_path) %>>
+    <%= link_to "Submit Banner Request", new_banner_path, id: 'new_banner_from_nav' %>
+  </li>
   <li>
     <a href="#">Development</a>
   </li>
