@@ -1,5 +1,5 @@
 class BannersController < ApplicationController
-  before_action :set_banner, only: [:show]
+  before_action :set_banner, only: [:show, :edit, :update]
 
   def index
     @banners = Banner.all
@@ -17,6 +17,17 @@ class BannersController < ApplicationController
       redirect_to @banner, notice: 'You banner submission was created sucessfully'
     else
       render :new
+    end
+  end
+
+  def edit
+  end
+
+  def update
+    if @banner.update(banner_params)
+      redirect_to @banner, notice: 'You banner submission was edited sucessfully'
+    else
+      render :edit
     end
   end
 
