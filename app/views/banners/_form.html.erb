@@ -6,40 +6,43 @@
     <% end %>
   <% end %>
 
+<div class ="row">
+  <div class ="col-md-8">
+      <div class="form-group">
+        <%= f.label :start_date, class: "col-sm-2 control-label" %>
+        <%= f.date_field :start_date, class: "form-control" %>
+      </div>
 
-  <div class="form-group">
-    <%= f.label :start_date, class: "col-sm-2 control-label" %>
-    <%= f.date_field :start_date, class: "form-control" %>
+      <div class="form-group">
+        <%= f.label :end_date, class: "col-sm-2 control-label" %>
+        <%= f.date_field :end_date, class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :image_folder, class: "col-sm-2 control-label" %>
+        <%= f.text_field :image, class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :location, class: "col-sm-2 control-label" %>
+        <%= f.text_field :location, class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :headline, class: "col-sm-2 control-label" %>
+        <%= f.text_area :headline, class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :subcopy, class: "col-sm-2 control-label" %>
+        <%= f.text_area :subcopy, class: "form-control" %>
+      </div>
+
+      <%= f.submit 'Save', class: "btn btn-primary btn-block" %>
+
+    <% end %>
   </div>
-
-  <div class="form-group">
-    <%= f.label :end_date, class: "col-sm-2 control-label" %>
-    <%= f.date_field :end_date, class: "form-control" %>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :image_folder, class: "col-sm-2 control-label" %>
-    <%= f.text_field :image, class: "form-control" %>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :location, class: "col-sm-2 control-label" %>
-    <%= f.text_field :location, class: "form-control" %>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :headline, class: "col-sm-2 control-label" %>
-    <%= f.text_area :headline, class: "form-control" %>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :subcopy, class: "col-sm-2 control-label" %>
-    <%= f.text_area :subcopy, class: "form-control" %>
-  </div>
-
-  <%= f.submit 'Save', class: "btn btn-primary btn-block" %>
-
-<% end %>
+</div>
 
 
 
