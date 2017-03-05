@@ -22,3 +22,6 @@
 ## UI
 - Bootstrap -> formatting
 
+devcamp Rails cheatsheets
+https://rails.devcamp.com/trails/professional-rails-development-course/campsites/advanced-user-features
+
