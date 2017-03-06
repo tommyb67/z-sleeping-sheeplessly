@@ -22,6 +22,17 @@
 ## UI
 - Bootstrap -> formatting
 
+## Banner Submission workflow
+- Enter a banner submission
+- Review the submission
+- Admin assigns to Ops team member
+- Goes into Ops team member queue
+
+- Add a status to banner (required)
+- Status has a defualt value
+- Implement approval stages
+
+
 devcamp Rails cheatsheets
 https://rails.devcamp.com/trails/professional-rails-development-course/campsites/advanced-user-features
 
