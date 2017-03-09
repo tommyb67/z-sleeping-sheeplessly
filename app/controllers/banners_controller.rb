@@ -21,9 +21,12 @@ class BannersController < ApplicationController
   end
 
   def edit
+    authorize @banner
   end
 
   def update
+    authorize @banner
+
     if @banner.update(banner_params)
       redirect_to @banner, notice: 'You banner submission was edited sucessfully'
     else
