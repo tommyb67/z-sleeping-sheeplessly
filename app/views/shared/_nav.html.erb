@@ -2,39 +2,44 @@
   <h1>Sleeping Sheeplessly</h1>
 </div>
 
-<ul class="custom-nav nav nav-tabs">
-  <li class=<%= active?(root_path) %>>
-    <%= link_to "Home", root_path %>
-  </li>
-  <li class=<%= active?(banners_path) %>>
-    <%= link_to "Banners", banners_path %>
-  </li>
-  <li class=<%= active?(new_banner_path) %>>
-    <%= link_to "Submit Banner Request", new_banner_path, id: 'new_banner_from_nav' %>
-  </li>
-  <li>
-    <a href="#">Development</a>
-  </li>
-  <li>
-    <a href="#">Promotions</a>
-  </li>
-  <li>
-    <a href="#">Product Setups</a>
-  </li>
-  <li>
-    <a href="#">Ad-Hoc Requests</a>
-  </li>
-  <li class="dropdown pull-right">
-     <a href="#" data-toggle="dropdown" class="dropdown-toggle">Options<strong class="caret"></strong></a>
-    <ul class="dropdown-menu">
-      <li>
-        <%= link_to "TODO: Admin Dashboard", root_path %>
-      </li>
-      <li class="divider">
-      </li>
-      <li>
-        <%= link_to "Logout", destroy_user_session_path, method: :delete %>
-      </li>
-    </ul>
-  </li>
-</ul>
+<% if current_user %>
+  <ul class="custom-nav nav nav-tabs">
+    <li class=<%= active?(root_path) %>>
+      <%= link_to "Home", root_path %>
+    </li>
+    <li class=<%= active?(banners_path) %>>
+      <%= link_to "Banners", banners_path %>
+    </li>
+    <li class=<%= active?(new_banner_path) %>>
+      <%= link_to "Submit Banner Request", new_banner_path, id: 'new_banner_from_nav' %>
+    </li>
+    <li>
+      <a href="#">Development</a>
+    </li>
+    <li>
+      <a href="#">Promotions</a>
+    </li>
+    <li>
+      <a href="#">Product Setups</a>
+    </li>
+    <li>
+      <a href="#">Ad-Hoc Requests</a>
+    </li>
+    <li class="dropdown pull-right">
+       <a href="#" data-toggle="dropdown" class="dropdown-toggle">Options<strong class="caret"></strong></a>
+      <ul class="dropdown-menu">
+
+        <% if current_user.try(:type) == 'AdminUser' %>
+        <li>
+          <%= link_to "Admin Dashboard", admin_root_path %>
+        </li>
+        <li class="divider"></li>
+        <% end %>
+
+        <li>
+          <%= link_to "Logout", destroy_user_session_path, method: :delete %>
+        </li>
+      </ul>
+    </li>
+  </ul>
+<% end %>
