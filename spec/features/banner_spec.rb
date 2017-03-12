@@ -53,7 +53,7 @@ describe 'navigate' do
     @banner = FactoryGirl.create(:banner)
     visit banners_path
 
-    click_link("delete_post_#{@banner.id}_from_index")
+    click_link("delete_banner_#{@banner.id}_from_index")
     expect(page.status_code).to eq(200)
   end
  end
