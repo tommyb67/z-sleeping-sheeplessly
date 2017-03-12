@@ -19,11 +19,23 @@ describe 'navigate' do
       expect(page).to have_content(/Banners/)
     end
 
-    it 'has a list of banner requests' do
+    it 'has a list of banner submissions' do
       banner1 = FactoryGirl.build_stubbed(:banner)
       banner2 = FactoryGirl.build_stubbed(:second_banner)
       visit banners_path
       expect(page).to have_content(/Start Date|End Date/)
+    end
+
+    it 'has a scope so that only banner submission creators can see their own banner submissions' do
+     banner1 = Banner.create(start_date: Date.today, end_date: Date.tomorrow, image: 'ghjk', location: 'ghjk', user_id: @user.id)
+      banner2 = Banner.create(start_date: Date.today, end_date: Date.tomorrow, image: 'ghjk', location: 'ghjk', user_id: @user.id)
+
+      other_user = User.create(first_name: 'Non', last_name: 'Authorized', email: 'nonauthemail@example.com', password: 'acbdef', password_confirmation: 'abcdef')
+      banner_from_other_user = Banner.create(start_date: Date.today, end_date: Date.tomorrow, image: 'ghjk', location: 'this location', user_id: other_user.id)
+
+      visit banners_path
+
+      expect(page).to_not have_content(/this location/)
     end
   end
 

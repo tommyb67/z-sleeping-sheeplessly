@@ -14,4 +14,5 @@ FactoryGirl.define do
     location "Another spot on website"
     user
   end
+
 end
