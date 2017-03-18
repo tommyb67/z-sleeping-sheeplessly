@@ -1,9 +1,14 @@
 require 'rails_helper'
 
 describe 'navigate' do
+  let(:user) { FactoryGirl.create(:user) }
+
+  let(:banner) do
+    Banner.create(start_date: Date.today, end_date: Date.tomorrow, image: 'ghjk', location: 'ghjk', user_id: user.id)
+  end
+
   before do
-    @user = FactoryGirl.create(:user)
-    login_as(@user, :scope => :user)
+    login_as(user, :scope => :user)
   end
 
   describe 'index' do
@@ -27,9 +32,6 @@ describe 'navigate' do
     end
 
     it 'has a scope so that only banner submission creators can see their own banner submissions' do
-     banner1 = Banner.create(start_date: Date.today, end_date: Date.tomorrow, image: 'ghjk', location: 'ghjk', user_id: @user.id)
-      banner2 = Banner.create(start_date: Date.today, end_date: Date.tomorrow, image: 'ghjk', location: 'ghjk', user_id: @user.id)
-
       other_user = User.create(first_name: 'Non', last_name: 'Authorized', email: 'nonauthemail@example.com', password: 'acbdef', password_confirmation: 'abcdef')
       banner_from_other_user = Banner.create(start_date: Date.today, end_date: Date.tomorrow, image: 'ghjk', location: 'this location', user_id: other_user.id)
 
@@ -50,10 +52,16 @@ describe 'navigate' do
 
  describe 'delete' do
   it 'can be deleted' do
-    @banner = FactoryGirl.create(:banner)
+    logout(:user)
+
+    delete_user = FactoryGirl.create(:user)
+    login_as(delete_user, :scope => :user)
+
+    banner_to_delete = Banner.create(start_date: Date.today, end_date: Date.tomorrow, image: 'ghjk', location: 'this location', user_id: delete_user.id)
+
     visit banners_path
 
-    click_link("delete_banner_#{@banner.id}_from_index")
+    click_link("delete_banner_#{banner_to_delete.id}_from_index")
     expect(page.status_code).to eq(200)
   end
  end
@@ -89,14 +97,8 @@ describe 'navigate' do
   end
 
   describe 'edit' do
-    before do
-      @edit_user = User.create(first_name: 'asdf', last_name: 'asdf', email: 'asdfasdf@asdf.com', password: 'asdfasdf', password_confirmation: 'asdfasdf')
-      login_as(@edit_user, :scope => :user)
-      @edit_banner = Banner.create(start_date: Date.today, end_date: Date.tomorrow, image: 'ghjk', location: 'ghjk', user_id: @edit_user.id)
-    end
-
     it 'can be edited' do
-      visit edit_banner_path(@edit_banner)
+      visit edit_banner_path(banner)
 
       fill_in 'banner[start_date]', with: Date.today
       fill_in 'banner[end_date]', with: Date.today
@@ -111,7 +113,7 @@ describe 'navigate' do
       non_authorized_user = FactoryGirl.create(:non_authorized_user)
       login_as(non_authorized_user, :scope => :user)
 
-      visit edit_banner_path(@edit_banner)
+      visit edit_banner_path(banner)
       expect(current.path).to eq(root_path)
     end
   end
