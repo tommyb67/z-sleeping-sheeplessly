@@ -19,8 +19,7 @@ describe 'navigate' do
       expect(@banner.reload.status).to eq('assigned')
     end
 
-
-    xit 'it cannot be edited by a non admin' do
+    it 'it cannot be edited by a non admin' do
       logout(:user)
       user = FactoryGirl.create(:user)
       login_as(user, :scope => :user)
@@ -28,6 +27,18 @@ describe 'navigate' do
       visit edit_banner_path(@banner)
 
       expect(page).to_not have_content('Assigned')
+    end
+
+    it 'should not be editable by the banner created if status is approved' do
+      logout(:user)
+      user = FactoryGirl.create(:user)
+      login_as(user, :scope => :user)
+
+      @banner.update(user_id: user.id, status: 'approved')
+
+      visit edit_banner_path(@banner)
+
+      expect(current_path).to eq(root_path)
     end
   end
 end

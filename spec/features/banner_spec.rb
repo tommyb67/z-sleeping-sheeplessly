@@ -37,7 +37,7 @@ describe 'navigate' do
 
       visit banners_path
 
-      expect(page).to_not have_content(/this location/)
+      expect(page).to_not have_content(/this banner shouldn't be seen/)
     end
   end
 
