@@ -15,7 +15,7 @@
       <%= banner.user.full_name %>
     </td>
     <td>
-      <%= banner.status %>
+       <%= status_label banner.status %>
     </td>
     <td>
       <%= link_to 'Edit', edit_banner_path(banner), id: "edit_#{banner.id}" %>
