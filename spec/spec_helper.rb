@@ -8,6 +8,10 @@ require 'capybara/rails'
 
 ActiveRecord::Migration.maintain_test_schema!
 
+config.before(:each) do
+  stub_const("SmsTool", FakeSMS)
+end
+
 RSpec.configure do |config|
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
   config.use_transactional_fixtures = false
