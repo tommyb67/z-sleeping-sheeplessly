@@ -38,5 +38,7 @@ gem "gritter", "1.2.0"
 gem "administrate", "~> 0.3.0"
 gem 'bourbon'
 gem 'pundit', '~> 1.1'
+gem 'twilio-ruby', '~> 4.13'
+gem 'dotenv-rails', :groups => [:development, :test]
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
